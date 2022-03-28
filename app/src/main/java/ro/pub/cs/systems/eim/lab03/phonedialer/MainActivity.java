@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 // IONITA DRAGOS 341 C1 LABORATOR 03 EIM - Interfata Grafica
 
@@ -45,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else if (view.getId() == R.id.finishButton) {
                 finish();
+            } else if (view.getId() == R.id.contactsManagerButton) {
+                if (txt.length() > 0) {
+                    Intent intent = new Intent("ro.pub.cs.systems.eim.lab04.contactsmanager.intent.action.ContactsManagerActivity");
+                    intent.putExtra("ro.pub.cs.systems.eim.lab04.contactsmanager.PHONE_NUMBER_KEY", txt);
+                    startActivityForResult(intent, 1234567);
+                } else {
+                    Toast.makeText(getApplication(), getResources().getString(R.string.phone_error), Toast.LENGTH_LONG).show();
+                }
             } else if (view.getId() != R.id.finishButton &&
                     view.getId() != R.id.callButton &&
                     view.getId() != R.id.deleteCharacterButton) {
@@ -97,5 +106,7 @@ public class MainActivity extends AppCompatActivity {
         button_finish.setOnClickListener(btnListener);
         ImageButton button_delete_char = findViewById(R.id.deleteCharacterButton);
         button_delete_char.setOnClickListener(btnListener);
+        ImageButton constacts_manager_button = findViewById(R.id.contactsManagerButton);
+        constacts_manager_button.setOnClickListener(btnListener);
     }
 }
